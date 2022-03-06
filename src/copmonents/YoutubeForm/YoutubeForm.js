@@ -22,6 +22,8 @@ const initialValues = {
     facebook: "",
     twitter: "",
   },
+  phoneNumbers: ["", ""],
+  phNumbers: [""],
 };
 const onSubmit = (values) => {
   console.log("form data", values);
@@ -99,6 +101,45 @@ function YoutubeForm() {
         <div className="form-control">
           <label htmlFor="twitter">twitter</label>
           <Field type="text" id="twitter" name="social.twitter" />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="primatyPhone">primatyPhone</label>
+          <Field type="text" id="primatyPhone" name="phoneNumbers[0]" />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="secondaryPhone">secondaryPhone</label>
+          <Field type="text" id="secondaryPhone" name="phoneNumbers[1]" />
+        </div>
+
+        <div className="form-control">
+          <label>list of phone numbers</label>
+          <FieldArray name="phNumbers">
+            {(fieldArrayProps) => {
+              // console.log("fieldArrayProps", fieldArrayProps);
+              const { push, remove, form } = fieldArrayProps;
+              const { values } = form;
+              const { phNumbers } = values;
+              return (
+                <div>
+                  {phNumbers.map((phNumber, index) => (
+                    <div key={index}>
+                      <Field name={`phNumbers[${index}]`} />
+                      {index > 0 && (
+                        <button type="button" onClick={() => remove(index)}>
+                          -
+                        </button>
+                      )}
+                      <button type="button" onClick={() => push("")}>
+                        +
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              );
+            }}
+          </FieldArray>
         </div>
 
         <button type="submit">Submit</button>
