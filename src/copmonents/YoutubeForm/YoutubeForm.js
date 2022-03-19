@@ -40,7 +40,7 @@ const savedValues = {
   phNumbers: [""],
 };
 const onSubmit = (values, onSubmitProps) => {
-  console.log("form data", values);
+  // console.log("form data", values);
   console.log("onSubmitProps", onSubmitProps);
   onSubmitProps.setSubmitting(false);
   onSubmitProps.resetForm();
@@ -63,18 +63,19 @@ const validateComments = (value) => {
 
 function YoutubeForm() {
   const [formValues, setFormValues] = useState(null);
+
   return (
     <Formik
       initialValues={formValues || initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
-      enableReinitialize
+      // enableReinitialize
       // validateOnMount
       // validateOnChange={false}
       // validateOnBlur={false}
     >
       {(formik) => {
-        console.log("formik props", formik);
+        // console.log("formik props", formik);
         return (
           <Form>
             <div className="form-control">
@@ -120,8 +121,7 @@ function YoutubeForm() {
 
               {/* perfomance savior */}
               <FastField type="text" name="address">
-                {(props) => {
-                  const { field, form, meta } = props;
+                {({ field, form, meta }) => {
                   // console.log("props", props);
                   // console.log("Field redner");
                   return (
